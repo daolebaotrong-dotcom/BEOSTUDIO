@@ -1,3 +1,21 @@
+// Chuyển chế độ sáng / tối
+const themeToggle = document.querySelector('.theme-toggle')
+const root = document.documentElement
+
+function currentTheme() {
+  const set = root.getAttribute('data-theme')
+  if (set) return set
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+themeToggle.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark'
+  root.setAttribute('data-theme', next)
+  try {
+    localStorage.setItem('beo-theme', next)
+  } catch (e) {}
+})
+
 // Mobile nav toggle
 const toggle = document.querySelector('.nav-toggle')
 const menu = document.querySelector('.nav-menu')

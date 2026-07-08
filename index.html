@@ -10,6 +10,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/src/style.css" />
+    <script>
+      // Áp dụng theme đã lưu trước khi render để tránh nháy màu
+      (function () {
+        try {
+          var saved = localStorage.getItem('beo-theme');
+          if (saved === 'dark' || saved === 'light') {
+            document.documentElement.setAttribute('data-theme', saved);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <header class="site-header" id="top">
@@ -21,9 +32,22 @@
           </svg>
           <span>BEO<em>STUDIO</em></span>
         </a>
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Mở menu">
-          <span></span><span></span>
-        </button>
+        <div class="nav-controls">
+          <button class="theme-toggle" type="button" aria-label="Chuyển chế độ sáng/tối">
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M12 2.5v2.5M12 19v2.5M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2.5 12h2.5M19 12h2.5M4.2 19.8l1.8-1.8M18 6l1.8-1.8"/>
+              </g>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Mở menu">
+            <span></span><span></span>
+          </button>
+        </div>
         <ul class="nav-menu" id="nav-menu">
           <li><a href="#dich-vu">Dịch vụ</a></li>
           <li><a href="#portfolio">Bộ sưu tập</a></li>

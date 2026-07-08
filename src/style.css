@@ -2,13 +2,25 @@
    BEO STUDIO — design tokens
    ============================================================ */
 :root {
-  --milk: #faf6f0;        /* nền sữa ấm */
-  --cream: #f0e6d8;       /* kem đậm — nền section xen kẽ */
+  /* --- bảng màu nền tảng (chế độ sáng) --- */
+  --milk: #faf6f0;        /* nền trang */
+  --cream: #f0e6d8;       /* nền section xen kẽ */
   --rose: #e8c4bc;        /* hồng phấn bụi */
   --rose-deep: #d9a89c;   /* hồng đậm hơn cho hover */
-  --clay: #c4826b;        /* đất nung nhạt — điểm nhấn */
+  --clay: #c4826b;        /* đất nung — điểm nhấn */
   --ink: #3b2f2c;         /* nâu than chì — chữ chính */
   --ink-soft: #6f5f58;    /* chữ phụ */
+
+  /* --- token ngữ nghĩa (đổi theo theme) --- */
+  --surface: #ffffff;     /* nền thẻ (service, testimonial) */
+  --contrast-bg: #3b2f2c; /* dải tối: strip, footer */
+  --contrast-text: #faf6f0;
+  --border: color-mix(in srgb, var(--ink) 8%, transparent);
+
+  /* --- token cố định (không đổi theo theme) --- *
+     dùng cho lớp phủ / icon nằm trên ảnh pastel sáng */
+  --photo-ink: #3b2f2c;
+  --photo-light: #faf6f0;
 
   --font-display: "Playfair Display", "Times New Roman", serif;
   --font-body: "Be Vietnam Pro", system-ui, sans-serif;
@@ -16,6 +28,42 @@
   --radius-arch: 999px 999px 0 0; /* signature: khung vòm */
   --container: 1120px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light;
+}
+
+/* ============================================================
+   Chế độ tối — theo hệ thống, và ghi đè khi người dùng chọn
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --milk: #1b1512;
+    --cream: #241d17;
+    --rose: #d9a89c;
+    --rose-deep: #e8c4bc;
+    --clay: #dc9c81;
+    --ink: #f2e9e0;
+    --ink-soft: #bca99d;
+    --surface: #262019;
+    --contrast-bg: #100c0a;
+    --contrast-text: #f2e9e0;
+    --border: color-mix(in srgb, var(--ink) 12%, transparent);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --milk: #1b1512;
+  --cream: #241d17;
+  --rose: #d9a89c;
+  --rose-deep: #e8c4bc;
+  --clay: #dc9c81;
+  --ink: #f2e9e0;
+  --ink-soft: #bca99d;
+  --surface: #262019;
+  --contrast-bg: #100c0a;
+  --contrast-text: #f2e9e0;
+  --border: color-mix(in srgb, var(--ink) 12%, transparent);
+  color-scheme: dark;
 }
 
 /* ============================================================
@@ -66,7 +114,7 @@ h1, h2, h3 {
   z-index: 50;
   background: color-mix(in srgb, var(--milk) 88%, transparent);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  border-bottom: 1px solid var(--border);
 }
 
 .nav {
@@ -124,6 +172,41 @@ h1, h2, h3 {
 }
 
 .nav-cta:hover { background: var(--clay); color: var(--milk) !important; }
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.theme-toggle:hover { color: var(--clay); border-color: var(--clay); }
+
+.theme-toggle svg { width: 19px; height: 19px; }
+
+/* mặc định (sáng): hiện mặt trăng để mời sang tối; ẩn mặt trời */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+/* chế độ tối: hiện mặt trời để mời về sáng */
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
 
 .nav-toggle {
   display: none;
@@ -247,8 +330,8 @@ h1, h2, h3 {
    Trust strip
    ============================================================ */
 .strip {
-  background: var(--ink);
-  color: var(--milk);
+  background: var(--contrast-bg);
+  color: var(--contrast-text);
   padding-block: 1.8rem;
 }
 
@@ -276,6 +359,9 @@ h1, h2, h3 {
 
 .section-tinted { background: var(--cream); }
 
+.section-tinted .service-card,
+.section-tinted .testimonials blockquote { background: var(--surface); }
+
 .section-head { max-width: 620px; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
 
 .section-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
@@ -297,13 +383,13 @@ h1, h2, h3 {
 }
 
 .service-card {
-  background: #fff;
+  background: var(--surface);
   border-radius: 20px;
   padding: 2rem 1.8rem;
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  border: 1px solid color-mix(in srgb, var(--ink) 6%, transparent);
+  border: 1px solid var(--border);
   transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
@@ -317,7 +403,7 @@ h1, h2, h3 {
   height: 88px;
   border-radius: var(--radius-arch);
   background: var(--tint, var(--rose));
-  color: var(--ink);
+  color: var(--photo-ink); /* icon luôn tối trên nền pastel sáng */
   display: grid;
   place-items: center;
 }
@@ -390,8 +476,8 @@ h1, h2, h3 {
   bottom: 0;
   padding: 2.2rem 1.2rem 1.1rem;
   font-size: 0.85rem;
-  color: var(--milk);
-  background: linear-gradient(transparent, color-mix(in srgb, var(--ink) 65%, transparent));
+  color: var(--photo-light);
+  background: linear-gradient(transparent, color-mix(in srgb, var(--photo-ink) 72%, transparent));
 }
 
 /* nhịp so le của lưới — hàng giữa hạ thấp */
@@ -445,7 +531,7 @@ h1, h2, h3 {
 }
 
 .testimonials blockquote {
-  background: var(--milk);
+  background: var(--surface);
   border-radius: 20px 20px 20px 4px;
   padding: 1.8rem 1.6rem;
   display: flex;
@@ -465,8 +551,8 @@ h1, h2, h3 {
    CTA band
    ============================================================ */
 .cta-band {
-  background: linear-gradient(135deg, var(--clay), var(--rose-deep));
-  color: var(--milk);
+  background: linear-gradient(135deg, #c4826b, #d9a89c);
+  color: var(--photo-light);
   padding-block: clamp(3rem, 7vw, 5rem);
 }
 
@@ -479,27 +565,27 @@ h1, h2, h3 {
 }
 
 .cta-inner h2 {
-  color: var(--milk);
+  color: var(--photo-light);
   font-size: clamp(1.6rem, 3.4vw, 2.4rem);
 }
 
 .cta-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
 
-.btn-light { background: var(--milk); color: var(--ink); }
-.btn-light:hover { background: var(--cream); }
+.btn-light { background: var(--photo-light); color: var(--photo-ink); }
+.btn-light:hover { background: #f0e6d8; }
 
 .btn-outline-light {
-  border: 1.5px solid color-mix(in srgb, var(--milk) 70%, transparent);
-  color: var(--milk);
+  border: 1.5px solid color-mix(in srgb, var(--photo-light) 70%, transparent);
+  color: var(--photo-light);
 }
-.btn-outline-light:hover { border-color: var(--milk); }
+.btn-outline-light:hover { border-color: var(--photo-light); }
 
 /* ============================================================
    Footer
    ============================================================ */
 .site-footer {
-  background: var(--ink);
-  color: color-mix(in srgb, var(--milk) 82%, transparent);
+  background: var(--contrast-bg);
+  color: color-mix(in srgb, var(--contrast-text) 82%, transparent);
   padding-top: clamp(3rem, 6vw, 4.5rem);
 }
 
@@ -510,7 +596,7 @@ h1, h2, h3 {
   padding-bottom: 2.5rem;
 }
 
-.site-footer .brand { color: var(--milk); margin-bottom: 0.8rem; }
+.site-footer .brand { color: var(--contrast-text); margin-bottom: 0.8rem; }
 
 .footer-brand p { font-size: 0.9rem; max-width: 28ch; }
 
@@ -531,7 +617,7 @@ h1, h2, h3 {
 .site-footer a { font-size: 0.9rem; }
 
 .footer-bottom {
-  border-top: 1px solid color-mix(in srgb, var(--milk) 12%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--contrast-text) 12%, transparent);
   padding-block: 1.3rem;
   font-size: 0.82rem;
   opacity: 0.7;
