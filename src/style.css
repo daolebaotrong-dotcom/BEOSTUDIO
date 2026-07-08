@@ -1,0 +1,612 @@
+/* ============================================================
+   BEO STUDIO — design tokens
+   ============================================================ */
+:root {
+  --milk: #faf6f0;        /* nền sữa ấm */
+  --cream: #f0e6d8;       /* kem đậm — nền section xen kẽ */
+  --rose: #e8c4bc;        /* hồng phấn bụi */
+  --rose-deep: #d9a89c;   /* hồng đậm hơn cho hover */
+  --clay: #c4826b;        /* đất nung nhạt — điểm nhấn */
+  --ink: #3b2f2c;         /* nâu than chì — chữ chính */
+  --ink-soft: #6f5f58;    /* chữ phụ */
+
+  --font-display: "Playfair Display", "Times New Roman", serif;
+  --font-body: "Be Vietnam Pro", system-ui, sans-serif;
+
+  --radius-arch: 999px 999px 0 0; /* signature: khung vòm */
+  --container: 1120px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--milk);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+/* ============================================================
+   Header / nav
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--milk) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.9rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.brand em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--clay);
+  margin-left: 0.2em;
+}
+
+.brand-mark { width: 30px; height: 30px; color: var(--clay); }
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  list-style: none;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+  transition: color 0.2s;
+}
+
+.nav-menu a:hover { color: var(--clay); }
+
+.nav-cta {
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--clay);
+  border-radius: 999px;
+  padding: 0.45em 1.1em;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-cta:hover { background: var(--clay); color: var(--milk) !important; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  transition: transform 0.25s var(--ease), opacity 0.25s;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-bottom: 1.1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5.2vw, 3.8rem);
+  margin-bottom: 1.3rem;
+}
+
+.accent-serif {
+  font-style: italic;
+  color: var(--clay);
+}
+
+.lede {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  margin-bottom: 2.2rem;
+}
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.85em 1.9em;
+  border-radius: 999px;
+  transition: transform 0.25s var(--ease), background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary { background: var(--clay); color: var(--milk); }
+.btn-primary:hover { background: var(--ink); }
+
+.btn-ghost {
+  border: 1.5px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  color: var(--ink);
+}
+.btn-ghost:hover { border-color: var(--clay); color: var(--clay); }
+
+/* --- khung vòm signature --- */
+.arch {
+  border-radius: var(--radius-arch);
+  overflow: hidden;
+  position: relative;
+}
+
+.arch svg { width: 100%; height: 100%; object-fit: cover; }
+
+.hero-arch {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.arch-main {
+  width: min(340px, 80%);
+  aspect-ratio: 400 / 520;
+  box-shadow: 0 30px 60px -25px color-mix(in srgb, var(--clay) 45%, transparent);
+}
+
+.arch-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0.8rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--ink);
+  opacity: 0.55;
+}
+
+.arch-small {
+  position: absolute;
+  width: 130px;
+  aspect-ratio: 200 / 260;
+  bottom: -1.5rem;
+  left: 0;
+  border: 5px solid var(--milk);
+  box-shadow: 0 18px 35px -18px color-mix(in srgb, var(--ink) 40%, transparent);
+}
+
+/* ============================================================
+   Trust strip
+   ============================================================ */
+.strip {
+  background: var(--ink);
+  color: var(--milk);
+  padding-block: 1.8rem;
+}
+
+.strip-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.strip-item strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--rose);
+}
+
+.strip-item span { font-size: 0.85rem; opacity: 0.8; }
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+
+.section-tinted { background: var(--cream); }
+
+.section-head { max-width: 620px; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+
+.section-head h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); }
+
+.section-note {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ============================================================
+   Services
+   ============================================================ */
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 6%, transparent);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 45px -25px color-mix(in srgb, var(--clay) 50%, transparent);
+}
+
+.service-visual {
+  width: 72px;
+  height: 88px;
+  border-radius: var(--radius-arch);
+  background: var(--tint, var(--rose));
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+}
+
+.service-visual svg { width: 44px; height: 44px; }
+
+.service-card h3 {
+  font-size: 1.35rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card h3 span {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clay);
+  margin-top: 0.3rem;
+}
+
+.service-card > p { font-size: 0.95rem; color: var(--ink-soft); }
+
+.service-card ul {
+  list-style: none;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  display: grid;
+  gap: 0.45rem;
+}
+
+.service-card li::before {
+  content: "◠";
+  color: var(--clay);
+  margin-right: 0.55em;
+}
+
+.link-arrow {
+  margin-top: auto;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: var(--clay);
+}
+
+.link-arrow::after {
+  content: " →";
+  transition: margin-left 0.2s var(--ease);
+}
+
+.link-arrow:hover::after { margin-left: 0.35em; }
+
+/* ============================================================
+   Gallery
+   ============================================================ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.gallery .arch { aspect-ratio: 3 / 4; }
+
+.gallery figure { position: relative; }
+
+.gallery figcaption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 2.2rem 1.2rem 1.1rem;
+  font-size: 0.85rem;
+  color: var(--milk);
+  background: linear-gradient(transparent, color-mix(in srgb, var(--ink) 65%, transparent));
+}
+
+/* nhịp so le của lưới — hàng giữa hạ thấp */
+@media (min-width: 761px) {
+  .gallery .g2, .gallery .g5 { translate: 0 2rem; }
+  .gallery { padding-bottom: 2rem; }
+}
+
+/* ============================================================
+   Steps
+   ============================================================ */
+.steps {
+  list-style: none;
+  counter-reset: step;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.steps li {
+  counter-increment: step;
+  padding-top: 1.2rem;
+  border-top: 2px solid var(--rose);
+  position: relative;
+}
+
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--clay);
+  position: absolute;
+  top: -0.75rem;
+  background: var(--milk);
+  padding-right: 0.6em;
+}
+
+.steps h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+
+.steps p { font-size: 0.92rem; color: var(--ink-soft); }
+
+.steps a { color: var(--clay); font-weight: 500; }
+
+/* ============================================================
+   Testimonials
+   ============================================================ */
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.testimonials blockquote {
+  background: var(--milk);
+  border-radius: 20px 20px 20px 4px;
+  padding: 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.testimonials p { font-size: 0.95rem; }
+
+.testimonials footer {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--clay);
+}
+
+/* ============================================================
+   CTA band
+   ============================================================ */
+.cta-band {
+  background: linear-gradient(135deg, var(--clay), var(--rose-deep));
+  color: var(--milk);
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+
+.cta-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.cta-inner h2 {
+  color: var(--milk);
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+}
+
+.cta-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+.btn-light { background: var(--milk); color: var(--ink); }
+.btn-light:hover { background: var(--cream); }
+
+.btn-outline-light {
+  border: 1.5px solid color-mix(in srgb, var(--milk) 70%, transparent);
+  color: var(--milk);
+}
+.btn-outline-light:hover { border-color: var(--milk); }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  background: var(--ink);
+  color: color-mix(in srgb, var(--milk) 82%, transparent);
+  padding-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 0.8fr;
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.site-footer .brand { color: var(--milk); margin-bottom: 0.8rem; }
+
+.footer-brand p { font-size: 0.9rem; max-width: 28ch; }
+
+.site-footer h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  color: var(--rose);
+  margin-bottom: 0.7rem;
+}
+
+.site-footer address {
+  font-style: normal;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.site-footer a { font-size: 0.9rem; }
+
+.footer-bottom {
+  border-top: 1px solid color-mix(in srgb, var(--milk) 12%, transparent);
+  padding-block: 1.3rem;
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity 0.7s var(--ease), translate 0.7s var(--ease);
+}
+
+.reveal.in { opacity: 1; translate: 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; translate: none; transition: none; }
+  .btn, .service-card { transition: none; }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 960px) {
+  .services, .testimonials { grid-template-columns: 1fr 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; row-gap: 2.5rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 760px) {
+  .nav-toggle { display: flex; }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--milk);
+    border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+    padding: 0.5rem 1.5rem 1.2rem;
+    display: none;
+  }
+
+  .nav-menu.open { display: flex; }
+
+  .nav-menu li { width: 100%; }
+
+  .nav-menu a {
+    display: block;
+    padding-block: 0.7rem;
+    font-size: 1rem;
+  }
+
+  .nav-cta { display: inline-block; margin-top: 0.5rem; text-align: center; }
+
+  .nav-toggle[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+  .hero { grid-template-columns: 1fr; padding-block: 2.5rem; }
+  .hero-arch { order: -1; }
+  .arch-main { width: min(280px, 75%); }
+  .arch-small { width: 100px; left: 4%; }
+
+  .strip-inner { grid-template-columns: 1fr 1fr; }
+
+  .services, .testimonials, .steps { grid-template-columns: 1fr; }
+
+  .gallery { grid-template-columns: 1fr 1fr; }
+
+  .cta-inner { flex-direction: column; text-align: center; }
+
+  .footer-grid { grid-template-columns: 1fr; }
+}
