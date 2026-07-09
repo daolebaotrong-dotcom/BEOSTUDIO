@@ -24,6 +24,22 @@
 4. git push origin main   → website tự cập nhật sau 1–2 phút
 ```
 
+### ⚠️ Nếu dùng Claude Desktop app (không phải phiên CLI/terminal này)
+
+Claude Desktop có thể chạy ở **"local agent mode"** — sửa file trong một bản sao/checkout **riêng** nằm trong
+`~/Library/Application Support/Claude/local-agent-mode-sessions/.../outputs/`, **không tự commit/push**.
+Kết quả: bạn thấy "đã sửa xong" trên Desktop nhưng web thật **không cập nhật**.
+
+→ Nếu gặp tình huống "đã sửa nhưng không lên web", luôn kiểm tra:
+```bash
+find "$HOME/Library/Application Support/Claude/local-agent-mode-sessions" -maxdepth 8 -iname "*.patch" -newer <thời điểm nghi ngờ>
+```
+hoặc tìm thư mục output mới nhất có tên gần giống dự án, lấy file/patch trong đó, áp vào
+`~/Documents/CLAUDE/beostudio-web` (thư mục chuẩn), test bằng `npm run dev`, rồi mới `git push`.
+
+Cũng có thể **repo bị phân nhánh** nếu một phiên khác (Desktop hoặc web) đã tự push thẳng — luôn
+`git fetch && git log --oneline origin/main` để kiểm tra trước khi push.
+
 ---
 
 ## 2. Cấu trúc dự án
