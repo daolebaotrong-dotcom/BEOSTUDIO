@@ -5,6 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="BEO STUDIO — Studio nhiếp ảnh bé sơ sinh & gia đình tại Long Thành và Biên Hoà. Lưu giữ khoảnh khắc đầu đời của con. Đặt lịch: 0792 792 679" />
+    <meta name="facebook-domain-verification" content="im3rutqxc13sdkqoot2vdku1jf866y" />
     <title>BEO STUDIO — Nhiếp ảnh Bé & Gia đình | Long Thành · Biên Hoà</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +24,34 @@
     </script>
   </head>
   <body>
+    <!-- ============ FACEBOOK CUSTOMER CHAT PLUGIN ============ -->
+    <div id="fb-root"></div>
+    <div
+      id="fb-customerchat"
+      class="fb-customerchat"
+      attribution="setup_tool"
+      page_id="534539057063096"
+      theme_color="#c4826b"
+    ></div>
+    <script>
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '1500733448490979',
+          xfbml: true,
+          version: 'v21.0',
+        });
+      };
+      (function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      })(document, 'script', 'facebook-jssdk');
+    </script>
+
     <header class="site-header" id="top">
       <nav class="nav container" aria-label="Điều hướng chính">
         <a class="brand" href="#top">
@@ -246,65 +275,46 @@
             <span>BEO<em>STUDIO</em></span>
           </a>
           <p>Studio nhiếp ảnh bé sơ sinh, mẹ bầu &amp; gia đình tại Đồng Nai.</p>
+          <a class="footer-hotline" href="tel:0792792679">Hotline: 0792 792 679</a>
+          <p class="footer-hours">Mở cửa: Thứ 2 – Chủ nhật, 8:00 – 19:00</p>
         </div>
         <div>
           <h4>Chi nhánh Long Thành</h4>
           <address>Thị trấn Long Thành, huyện Long Thành, Đồng Nai</address>
-          <a href="tel:0792792679">0792 792 679</a>
         </div>
         <div>
           <h4>Chi nhánh Biên Hoà</h4>
           <address>TP. Biên Hoà, Đồng Nai</address>
-          <a href="tel:0792792679">0792 792 679</a>
         </div>
-        <div>
-          <h4>Giờ mở cửa</h4>
-          <p>Thứ 2 – Chủ nhật<br />8:00 – 19:00</p>
+        <div class="map-card map-card--long-thanh">
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.4178193439434!2d106.9536904!3d10.7792766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175197bb7c77493%3A0x241c480f52e8be6e!2zQkVPIFNUVURJTyDhuqJOSCBWSeG7hk4gQkFCWSAmIEdJQSDEkMOMTkg!5e0!3m2!1svi!2s!4v1783567046273!5m2!1svi!2s"
+              title="Bản đồ chỉ đường BEO STUDIO chi nhánh Long Thành"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a class="link-arrow" href="https://www.google.com/maps/dir/?api=1&destination=10.7792766,106.9536904" target="_blank" rel="noopener">Chỉ đường</a>
+        </div>
+        <div class="map-card map-card--bien-hoa">
+          <div class="map-frame">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.4389597172153!2d106.83020311113486!3d10.930176656292899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174df589a64bb5d%3A0xe5ac897d6e3a14b4!2zQkVPIFNUVURJTyBCScOKTiBIT8OAIC0gQ8agIFPhu54gMg!5e0!3m2!1svi!2s!4v1783567092546!5m2!1svi!2s"
+              title="Bản đồ chỉ đường BEO STUDIO chi nhánh Biên Hoà"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <a class="link-arrow" href="https://www.google.com/maps/dir/?api=1&destination=10.930176656292899,106.83020311113486" target="_blank" rel="noopener">Chỉ đường</a>
         </div>
       </div>
       <div class="container footer-bottom">
         <p>© 2026 BEO STUDIO. Giữ khoảnh khắc, giữ yêu thương.</p>
       </div>
     </footer>
-
-
-    <!-- ============ NÚT CHAT MESSENGER ============ -->
-    <a
-      class="messenger-fab"
-      href="https://m.me/chupanhchobethoinoilongthanh"
-      rel="noopener"
-      aria-label="Chat với BEO STUDIO qua Messenger"
-    >
-      <svg viewBox="0 0 24 24" width="30" height="30" fill="#fff" aria-hidden="true">
-        <path d="M12 2C6.36 2 2 6.13 2 11.7c0 2.91 1.19 5.44 3.14 7.17.16.14.26.35.27.57l.05 1.78c.02.57.6.94 1.12.71l1.98-.87c.17-.08.36-.09.54-.04 1.5.41 3.09.5 4.7.24C18.9 21.4 22 17.55 22 11.7 22 6.13 17.64 2 12 2zm6 7.46l-2.93 4.66c-.47.74-1.47.93-2.18.4l-2.34-1.75a.6.6 0 0 0-.72 0l-3.16 2.4c-.42.32-.97-.18-.69-.63l2.93-4.66c.47-.74 1.47-.93 2.18-.4l2.34 1.75c.21.16.5.16.72 0l3.16-2.4c.42-.32.97.18.69.63z"/>
-      </svg>
-    </a>
-    <style>
-      .messenger-fab {
-        position: fixed;
-        right: 22px;
-        bottom: 22px;
-        z-index: 1000;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #00b2ff 0%, #006aff 100%);
-        box-shadow: 0 6px 18px rgba(0, 106, 255, 0.42);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .messenger-fab:hover {
-        transform: scale(1.08);
-        box-shadow: 0 8px 24px rgba(0, 106, 255, 0.55);
-      }
-      .messenger-fab svg { display: block; }
-      @media (max-width: 600px) {
-        .messenger-fab { right: 16px; bottom: 16px; width: 52px; height: 52px; }
-      }
-    </style>
 
     <script type="module" src="/src/main.js"></script>
   </body>
