@@ -23,6 +23,8 @@
   --photo-light: #faf6f0;
 
   --font-display: "Playfair Display", "Times New Roman", serif;
+  --font-logo: "Cormorant Garamond", "Playfair Display", serif;
+  --font-script: "Great Vibes", "Playfair Display", cursive;
   --font-body: "Be Vietnam Pro", system-ui, sans-serif;
 
   --radius-arch: 999px 999px 0 0; /* signature: khung vòm */
@@ -109,13 +111,38 @@ h1, h2, h3 {
    Header / nav
    ============================================================ */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.35s var(--ease), backdrop-filter 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+.site-header.is-scrolled {
   background: color-mix(in srgb, var(--milk) 88%, transparent);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
+  border-bottom-color: var(--border);
 }
+
+/* Ở đầu trang (chưa cuộn), header nổi trên ảnh hero tối — luôn dùng chữ sáng bất kể theme */
+.site-header:not(.is-scrolled) .brand,
+.site-header:not(.is-scrolled) .nav-menu:not(.open) a,
+.site-header:not(.is-scrolled) .theme-toggle,
+.site-header:not(.is-scrolled) .nav-toggle span {
+  color: var(--photo-light);
+}
+.site-header:not(.is-scrolled) .nav-menu:not(.open) .nav-cta {
+  color: var(--photo-light) !important;
+  border-color: color-mix(in srgb, var(--photo-light) 60%, transparent);
+}
+.site-header:not(.is-scrolled) .theme-toggle { border-color: color-mix(in srgb, var(--photo-light) 40%, transparent); }
+.site-header:not(.is-scrolled) .nav-toggle span { background: var(--photo-light); }
+
+section[id] { scroll-margin-top: 84px; }
 
 .nav {
   display: flex;
@@ -127,23 +154,30 @@ h1, h2, h3 {
 
 .brand {
   display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  line-height: 1;
   text-decoration: none;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  letter-spacing: 0.04em;
   color: var(--ink);
+  transition: color 0.35s var(--ease);
 }
 
-.brand em {
-  font-style: normal;
+.brand-main {
+  font-family: var(--font-logo);
+  font-weight: 500;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+}
+
+.brand-sub {
+  font-family: var(--font-body);
   font-weight: 400;
+  font-size: 0.62rem;
+  letter-spacing: 0.42em;
+  padding-left: 0.42em;
   color: var(--clay);
-  margin-left: 0.2em;
 }
-
-.brand-mark { width: 30px; height: 30px; color: var(--clay); }
 
 .nav-menu {
   display: flex;
@@ -243,6 +277,15 @@ h1, h2, h3 {
   text-transform: uppercase;
   color: var(--clay);
   margin-bottom: 1.1rem;
+}
+
+.eyebrow-script {
+  font-family: var(--font-script);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  margin-bottom: 0.2rem;
 }
 
 .hero h1 {
@@ -872,16 +915,19 @@ h1, h2, h3 {
 }
 .hero-slide .eyebrow { color: var(--rose); }
 .hero-kicker {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  color: var(--rose);
-  margin-bottom: 0.2rem;
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  color: #d6b892;
+  margin-bottom: -0.4rem;
 }
 .hero-title {
+  font-family: var(--font-logo);
+  font-weight: 300;
   color: var(--photo-light);
-  font-size: clamp(3rem, 9vw, 6rem);
-  letter-spacing: 0.06em;
+  font-size: clamp(2.6rem, 8vw, 5.5rem);
+  letter-spacing: 0.14em;
   line-height: 1;
   margin-bottom: 1.4rem;
 }

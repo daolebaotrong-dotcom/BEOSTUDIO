@@ -18,6 +18,14 @@ if (themeToggle) {
   })
 }
 
+// Header trong suốt trên hero, đặc nền khi cuộn qua
+const header = document.querySelector('.site-header')
+if (header) {
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 40)
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+}
+
 // Mobile nav toggle
 const toggle = document.querySelector('.nav-toggle')
 const menu = document.querySelector('.nav-menu')
