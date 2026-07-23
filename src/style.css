@@ -131,6 +131,7 @@ h1, h2, h3 {
 /* Ở đầu trang (chưa cuộn), header nổi trên ảnh hero tối — luôn dùng chữ sáng bất kể theme */
 .site-header:not(.is-scrolled) .brand,
 .site-header:not(.is-scrolled) .nav-menu:not(.open) a,
+.site-header:not(.is-scrolled) .nav-menu:not(.open) .dropdown-trigger,
 .site-header:not(.is-scrolled) .theme-toggle,
 .site-header:not(.is-scrolled) .nav-toggle span {
   color: var(--photo-light);
