@@ -742,3 +742,518 @@ h1, h2, h3 {
 
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   ============  BỔ SUNG: BỐ CỤC KIỂU MJN  ====================
+   ============================================================ */
+
+/* --- Section head căn giữa --- */
+.section-head--center {
+  margin-inline: auto;
+  text-align: center;
+  max-width: 680px;
+}
+.section-head--center .section-note { margin-inline: auto; }
+
+/* ============================================================
+   Nav dropdown (Dịch vụ)
+   ============================================================ */
+.has-dropdown { position: relative; }
+
+.dropdown-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  transition: color 0.2s;
+}
+.dropdown-trigger::after {
+  content: "";
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  translate: 0 -1px;
+  transition: transform 0.2s;
+}
+.dropdown-trigger:hover { color: var(--clay); }
+
+.dropdown {
+  list-style: none;
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  left: 0;
+  min-width: 210px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.5rem;
+  box-shadow: 0 20px 40px -22px color-mix(in srgb, var(--ink) 55%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 8px;
+  transition: opacity 0.2s var(--ease), translate 0.2s var(--ease), visibility 0.2s;
+  z-index: 60;
+}
+.has-dropdown:hover .dropdown,
+.has-dropdown:focus-within .dropdown,
+.has-dropdown.open .dropdown {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+}
+.has-dropdown:hover .dropdown-trigger::after,
+.has-dropdown.open .dropdown-trigger::after { transform: rotate(-135deg); }
+
+.dropdown a {
+  display: block;
+  padding: 0.55rem 0.8rem;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+.dropdown a:hover { background: var(--cream); color: var(--clay); }
+
+/* ============================================================
+   1 · HERO SLIDESHOW
+   ============================================================ */
+.hero-slider {
+  position: relative;
+  overflow: hidden;
+  background: var(--contrast-bg);
+}
+.hero-slides {
+  position: relative;
+  min-height: clamp(460px, 78vh, 720px);
+}
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.9s var(--ease), visibility 0.9s;
+}
+.hero-slide.is-active { opacity: 1; visibility: visible; }
+.hero-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.08);
+  transition: transform 7s ease;
+}
+.hero-slide.is-active::before { transform: scale(1); }
+.hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--photo-ink) 78%, transparent) 0%,
+    color-mix(in srgb, var(--photo-ink) 52%, transparent) 45%,
+    color-mix(in srgb, var(--photo-ink) 18%, transparent) 100%);
+}
+.hero-slide-inner {
+  position: relative;
+  z-index: 2;
+  color: var(--photo-light);
+  padding-block: clamp(3rem, 8vw, 5rem);
+  max-width: 620px;
+}
+.hero-slide .eyebrow { color: var(--rose); }
+.hero-kicker {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  color: var(--rose);
+  margin-bottom: 0.2rem;
+}
+.hero-title {
+  color: var(--photo-light);
+  font-size: clamp(3rem, 9vw, 6rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin-bottom: 1.4rem;
+}
+.hero-lede {
+  font-size: 1.08rem;
+  color: color-mix(in srgb, var(--photo-light) 88%, transparent);
+  max-width: 46ch;
+  margin-bottom: 2rem;
+}
+.btn-ghost-light {
+  border: 1.5px solid color-mix(in srgb, var(--photo-light) 60%, transparent);
+  color: var(--photo-light);
+}
+.btn-ghost-light:hover { border-color: var(--photo-light); background: color-mix(in srgb, var(--photo-light) 12%, transparent); }
+
+.hero-dots {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 3;
+}
+.hero-dot {
+  width: 30px; height: 4px;
+  border: none;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--photo-light) 40%, transparent);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.hero-dot.is-active { background: var(--photo-light); }
+
+/* ============================================================
+   2 · DỊCH VỤ NỔI BẬT
+   ============================================================ */
+.featured {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+.featured-card {
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.8rem 1.6rem;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.featured-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 45px -25px color-mix(in srgb, var(--clay) 50%, transparent);
+}
+.featured-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--clay);
+  line-height: 1;
+}
+.featured-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.featured-body h3 {
+  font-size: 1.3rem;
+  margin: 0.3rem 0 0.6rem;
+  display: flex;
+  flex-direction: column;
+}
+.featured-body h3 em {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.25rem;
+}
+.featured-body p { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.8rem; }
+
+.other-services { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+.other-title {
+  font-size: 1.15rem;
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+.other-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+}
+.other-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 74px;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: var(--surface);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+}
+.other-grid a:hover { border-color: var(--clay); color: var(--clay); transform: translateY(-3px); }
+
+/* ============================================================
+   3 · GALLERY TABS
+   ============================================================ */
+.gallery-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: clamp(1.6rem, 3vw, 2.4rem);
+}
+.gtab {
+  border: 1.5px solid var(--border);
+  background: none;
+  border-radius: 999px;
+  padding: 0.45em 1.15em;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.gtab:hover { border-color: var(--clay); color: var(--clay); }
+.gtab.is-active { background: var(--clay); border-color: var(--clay); color: var(--milk); }
+
+.gallery figure.is-hidden { display: none; }
+
+.gallery-cta { text-align: center; margin-top: clamp(1.8rem, 4vw, 2.6rem); }
+
+/* ============================================================
+   4 · BẢNG GIÁ
+   ============================================================ */
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2vw, 1.6rem);
+}
+.price-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.price-card.is-featured {
+  border-color: var(--clay);
+  box-shadow: 0 24px 45px -28px color-mix(in srgb, var(--clay) 60%, transparent);
+}
+.price-badge {
+  position: absolute;
+  top: -0.8rem;
+  left: 1.5rem;
+  background: var(--clay);
+  color: var(--milk);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.3em 0.8em;
+  border-radius: 999px;
+}
+.price-badge--soft { background: var(--rose); color: var(--ink); }
+.price-card h3 { font-size: 1.3rem; }
+.price {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--clay);
+  line-height: 1;
+}
+.price-block { display: grid; gap: 0.4rem; }
+.price-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.price-card ul {
+  list-style: none;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+.price-card li::before {
+  content: "◠";
+  color: var(--clay);
+  margin-right: 0.5em;
+}
+.price-card .btn { margin-top: auto; text-align: center; }
+
+/* ============================================================
+   5 · KID CONCEPT CARD
+   ============================================================ */
+.kid-card {
+  border-radius: 26px;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg,
+      color-mix(in srgb, var(--photo-ink) 72%, transparent),
+      color-mix(in srgb, var(--clay) 55%, transparent)),
+    url('/images/hero-inset.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--photo-light);
+  padding: clamp(2.5rem, 6vw, 4.5rem);
+}
+.kid-card-text { max-width: 620px; }
+.kid-card .eyebrow { color: var(--rose); }
+.kid-card h2 { color: var(--photo-light); font-size: clamp(1.7rem, 3.6vw, 2.6rem); margin-bottom: 1rem; }
+.kid-card p { color: color-mix(in srgb, var(--photo-light) 90%, transparent); margin-bottom: 1rem; }
+.kid-tags { font-size: 0.85rem; color: var(--rose); letter-spacing: 0.03em; }
+
+/* ============================================================
+   6 · SỐ LIỆU
+   ============================================================ */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  text-align: center;
+}
+.stat strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--clay);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat span { font-size: 0.9rem; color: var(--ink-soft); }
+
+/* ============================================================
+   7 · GIÁ TRỊ
+   ============================================================ */
+.values {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+.value {
+  padding-top: 1.2rem;
+  border-top: 2px solid var(--rose);
+}
+.value-num {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--clay);
+  display: block;
+  margin-bottom: 0.6rem;
+}
+.value h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+.value p { font-size: 0.92rem; color: var(--ink-soft); }
+
+/* ============================================================
+   8 · TRẢI NGHIỆM
+   ============================================================ */
+.experience {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.exp-card h3 { font-size: 1.2rem; }
+.exp-card p { font-size: 0.92rem; color: var(--ink-soft); }
+.exp-note {
+  margin-top: auto;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--clay);
+}
+
+/* ============================================================
+   12 · BLOG
+   ============================================================ */
+.blog {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+.blog-card {
+  text-decoration: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.blog-thumb {
+  aspect-ratio: 3 / 2;
+  border-radius: 16px;
+}
+.blog-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+.blog-card:hover .blog-thumb img { transform: scale(1.05); }
+.blog-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.blog-card h3 { font-size: 1.1rem; }
+
+/* ============================================================
+   11 · CHI NHÁNH
+   ============================================================ */
+.branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+}
+.branch-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.branch-card h3 { font-size: 1.2rem; }
+.branch-card address { font-style: normal; font-size: 0.92rem; color: var(--ink-soft); }
+.branch-card .map-frame { aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; }
+.branch-card .map-frame iframe { width: 100%; height: 100%; border: 0; }
+
+/* --- Footer links list --- */
+.footer-links { list-style: none; display: grid; gap: 0.4rem; }
+.footer-links a { color: color-mix(in srgb, var(--contrast-text) 82%, transparent); text-decoration: none; }
+.footer-links a:hover { color: var(--rose); }
+
+/* ============================================================
+   RESPONSIVE (bổ sung)
+   ============================================================ */
+@media (max-width: 960px) {
+  .featured, .experience, .blog { grid-template-columns: 1fr; }
+  .pricing { grid-template-columns: 1fr 1fr; }
+  .other-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats, .values { grid-template-columns: 1fr 1fr; }
+  .branches { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .has-dropdown .dropdown {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    translate: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 0 0.8rem;
+    display: none;
+    background: none;
+  }
+  .has-dropdown.open .dropdown { display: block; }
+  .dropdown-trigger { padding-block: 0.7rem; font-size: 1rem; }
+  .hero-slides { min-height: 78vh; }
+  .pricing, .stats, .values, .other-grid { grid-template-columns: 1fr; }
+}
