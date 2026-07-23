@@ -1,0 +1,89 @@
+backend:
+  name: github
+  repo: daolebaotrong-dotcom/BEOSTUDIO
+  branch: main
+  base_url: https://beo-cms-auth.daolebaotrong.workers.dev
+  auth_endpoint: auth
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://beostudio.top
+display_url: https://beostudio.top
+
+locale: "vi"
+
+collections:
+  - name: "gallery"
+    label: "Bộ sưu tập ảnh"
+    files:
+      - name: "gallery"
+        label: "Ảnh gallery (kéo thả để đổi thứ tự)"
+        file: "public/content/gallery.json"
+        fields:
+          - label: "Danh sách ảnh"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.caption}}"
+            fields:
+              - { label: "Ảnh", name: "image", widget: "image" }
+              - { label: "Mô tả ảnh (alt, cho SEO)", name: "alt", widget: "string" }
+              - { label: "Chú thích hiển thị", name: "caption", widget: "string" }
+              - label: "Chủ đề"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Cho bé", value: "be" }
+                  - { label: "Newborn", value: "newborn" }
+                  - { label: "Mẹ bầu", value: "me-bau" }
+                  - { label: "Gia đình", value: "gia-dinh" }
+
+  - name: "pricing"
+    label: "Bảng giá"
+    files:
+      - name: "pricing"
+        label: "Các gói chụp (kéo thả để đổi thứ tự)"
+        file: "public/content/pricing.json"
+        fields:
+          - label: "Danh sách gói"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.price}}"
+            fields:
+              - { label: "Tên gói", name: "name", widget: "string" }
+              - { label: "Giá", name: "price", widget: "string" }
+              - label: "Nhãn nổi bật (để trống nếu không có)"
+                name: "badge"
+                widget: "select"
+                required: false
+                options: ["Bán chạy nhất", "Cao cấp"]
+              - label: "Gói chụp gồm"
+                name: "included"
+                widget: "list"
+                field: { label: "Mục", name: "item", widget: "string" }
+              - label: "Sản phẩm nhận được"
+                name: "products"
+                widget: "list"
+                field: { label: "Mục", name: "item", widget: "string" }
+
+  - name: "testimonials"
+    label: "Cảm nhận khách hàng"
+    files:
+      - name: "testimonials"
+        label: "Danh sách cảm nhận (kéo thả để đổi thứ tự)"
+        file: "public/content/testimonials.json"
+        fields:
+          - label: "Danh sách"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.author}}"
+            fields:
+              - { label: "Nội dung cảm nhận", name: "quote", widget: "text" }
+              - { label: "Tên khách (vd: Chị Ngọc — Long Thành)", name: "author", widget: "string" }
+              - label: "Thuộc chi nhánh (hiện riêng ở trang chi nhánh đó)"
+                name: "chi_nhanh"
+                widget: "select"
+                required: false
+                options:
+                  - { label: "Long Thành", value: "long-thanh" }
+                  - { label: "Biên Hoà", value: "bien-hoa" }

@@ -20,6 +20,15 @@
 - Trang chủ đã được **dựng lại theo phong cách luxury của MJN Studio** (https://mjnstudio.com) — tham chiếu thiết kế, KHÔNG sao chép ảnh/logo/câu chữ gốc của MJN.
 - **Bố cục 13 section:** hero slideshow → dịch vụ nổi bật → bộ sưu tập (section tối) → bảng giá → kid concept CTA → số liệu → giá trị → trải nghiệm → cảm nhận → quy trình → chi nhánh → tin tức/blog → footer.
 - Xem chi tiết token màu & font ở **mục 3**.
+- Ngoài trang chủ còn có: `dich-vu/chup-anh-cho-be-long-thanh/`, `dich-vu/chup-anh-cho-be-bien-hoa/` (trang dịch vụ theo chi nhánh), `bang-gia/`, `lien-he/`, `bo-suu-tap/` — tất cả build đa trang qua `vite.config.js` (xem mục 2).
+- Logo thật: `public/images/logo-beo.png` (đã xử lý nền trong suốt từ file gốc trong Downloads). Favicon là monogram chữ "B" cắt từ logo, xem `public/favicon-*.png`.
+
+### ⭐ CMS quản trị nội dung (Decap CMS, 2026-07)
+- Trang quản trị: **https://beostudio.top/admin/** — GitHub OAuth (setup 1 lần, xem `cms-oauth-worker/README.md`).
+- Nội dung **gallery / bảng giá / cảm nhận khách hàng** đã tách khỏi HTML, sống ở `public/content/*.json`. `src/main.js` (hàm `initCmsContent`) fetch các file này và render động vào các `<div data-cms="...">` trên trang. Sửa nội dung qua CMS = sửa trực tiếp JSON này → git commit → Hostinger tự deploy.
+- Widget `list` của Decap CMS cho kéo-thả đổi thứ tự item ngay trong khung quản trị (ảnh gallery, gói giá, testimonial).
+- **Không tự ý viết đè HTML tĩnh (figure/price-card/blockquote) trở lại vào các trang** — sẽ làm nội dung "trôi" khỏi CMS. Muốn đổi nội dung mẫu, sửa thẳng file JSON trong `public/content/`.
+- Ảnh upload qua CMS lưu vào `public/images/uploads/`.
 
 ### Quy trình chuẩn khi muốn sửa web
 ```
