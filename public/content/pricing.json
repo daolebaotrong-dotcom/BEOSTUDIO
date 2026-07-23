@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "name": "Beo Sun",
+      "price": "990.000đ",
+      "badge": "",
+      "included": ["01 concept", "Trang phục & phụ kiện phù hợp"],
+      "products": ["10 ảnh chỉnh sửa tinh", "Toàn bộ file gốc buổi chụp"]
+    },
+    {
+      "name": "Beo Star",
+      "price": "1.890.000đ",
+      "badge": "Bán chạy nhất",
+      "included": ["02 concept", "Trang phục & phụ kiện phù hợp", "Makeup nhẹ cho mẹ"],
+      "products": ["01 ảnh ép gỗ 40×60", "15 ảnh chỉnh sửa tinh", "Toàn bộ file gốc buổi chụp"]
+    },
+    {
+      "name": "Beo Moon",
+      "price": "2.790.000đ",
+      "badge": "",
+      "included": ["02 concept + 01 concept gia đình", "Trang phục & phụ kiện phù hợp", "Makeup nhẹ cho mẹ"],
+      "products": ["Album 20×20, 16 trang", "25 ảnh chỉnh sửa tinh", "Toàn bộ file gốc buổi chụp"]
+    },
+    {
+      "name": "Beo Luxury",
+      "price": "4.790.000đ",
+      "badge": "Cao cấp",
+      "included": ["03 concept + 01 concept gia đình", "Trang phục & phụ kiện cao cấp", "Makeup & làm tóc cho mẹ"],
+      "products": ["Album 20×20, 24 trang", "01 ảnh pha lê 50×75", "36 ảnh chỉnh sửa tinh + file gốc"]
+    }
+  ]
+}

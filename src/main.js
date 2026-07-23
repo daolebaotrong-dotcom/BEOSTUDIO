@@ -89,14 +89,89 @@ if (slides.length > 1) {
   start()
 }
 
-// ============ LỌC BỘ SƯU TẬP THEO TAB ============
-const tabs = Array.from(document.querySelectorAll('.gtab'))
-const figures = Array.from(document.querySelectorAll('.gallery figure'))
-if (tabs.length) {
+// ============ NỘI DUNG QUẢN LÝ QUA CMS (gallery / bảng giá / cảm nhận) ============
+function escapeHtml(str) {
+  return String(str ?? '').replace(/[&<>"']/g, (c) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]))
+}
+
+async function loadJSON(path) {
+  try {
+    const res = await fetch(path, { cache: 'no-store' })
+    if (!res.ok) return null
+    return await res.json()
+  } catch (e) {
+    return null
+  }
+}
+
+function renderGallery(container, items) {
+  container.innerHTML = items.map((it) => `
+    <figure class="arch" data-cat="${escapeHtml(it.category)}">
+      <img src="${escapeHtml(it.image)}" alt="${escapeHtml(it.alt)}" width="600" height="800" loading="lazy" />
+      <figcaption>${escapeHtml(it.caption)}</figcaption>
+    </figure>
+  `).join('')
+}
+
+function renderPricing(container, items) {
+  container.innerHTML = items.map((p) => {
+    const badgeClass = p.badge === 'Cao cấp' ? ' price-badge--soft' : ''
+    const cardClass = p.badge === 'Bán chạy nhất' ? ' is-featured' : ''
+    const badge = p.badge ? `<span class="price-badge${badgeClass}">${escapeHtml(p.badge)}</span>` : ''
+    const included = (p.included || []).map((i) => `<li>${escapeHtml(i)}</li>`).join('')
+    const products = (p.products || []).map((i) => `<li>${escapeHtml(i)}</li>`).join('')
+    return `
+      <article class="price-card${cardClass}">
+        ${badge}
+        <h3>${escapeHtml(p.name)}</h3>
+        <p class="price">${escapeHtml(p.price)}</p>
+        <div class="price-block"><span class="price-label">Gói chụp gồm</span><ul>${included}</ul></div>
+        <div class="price-block"><span class="price-label">Sản phẩm nhận được</span><ul>${products}</ul></div>
+        <a class="btn btn-primary" href="tel:0792792679">Đặt lịch ngay</a>
+      </article>
+    `
+  }).join('')
+}
+
+function renderTestimonials(container, items, chiNhanh) {
+  const filtered = chiNhanh ? items.filter((t) => t.chi_nhanh === chiNhanh) : items
+  container.innerHTML = filtered.map((t) => `
+    <blockquote>
+      <p>${escapeHtml(t.quote)}</p>
+      <footer>${escapeHtml(t.author)}</footer>
+    </blockquote>
+  `).join('')
+}
+
+async function initCmsContent() {
+  const galleryEl = document.querySelector('[data-cms="gallery"]')
+  const pricingEl = document.querySelector('[data-cms="pricing"]')
+  const testimonialsEl = document.querySelector('[data-cms="testimonials"]')
+
+  const tasks = []
+  if (galleryEl) tasks.push(loadJSON('/content/gallery.json').then((d) => d && renderGallery(galleryEl, d.items || [])))
+  if (pricingEl) tasks.push(loadJSON('/content/pricing.json').then((d) => d && renderPricing(pricingEl, d.items || [])))
+  if (testimonialsEl) {
+    tasks.push(
+      loadJSON('/content/testimonials.json').then(
+        (d) => d && renderTestimonials(testimonialsEl, d.items || [], testimonialsEl.dataset.chiNhanh || null)
+      )
+    )
+  }
+  await Promise.all(tasks)
+}
+
+// ============ LỌC BỘ SƯU TẬP THEO TAB (query động vì ảnh render sau) ============
+function setupGalleryTabs() {
+  const tabs = Array.from(document.querySelectorAll('.gtab'))
+  if (!tabs.length) return
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       const filter = tab.dataset.filter
       tabs.forEach((t) => t.classList.toggle('is-active', t === tab))
+      const figures = Array.from(document.querySelectorAll('.gallery figure'))
       figures.forEach((fig) => {
         const show = filter === 'all' || fig.dataset.cat === filter
         fig.classList.toggle('is-hidden', !show)
@@ -106,22 +181,29 @@ if (tabs.length) {
 }
 
 // ============ SCROLL REVEAL ============
-const revealTargets = document.querySelectorAll(
-  '.section-head, .featured-card, .other-grid a, .gallery figure, .price-card, .stat, .value, .exp-card, .steps li, .testimonials blockquote, .branch-card, .blog-card'
-)
+function setupScrollReveal() {
+  const revealTargets = document.querySelectorAll(
+    '.section-head, .featured-card, .other-grid a, .gallery figure, .price-card, .stat, .value, .exp-card, .steps li, .testimonials blockquote, .branch-card, .blog-card'
+  )
 
-revealTargets.forEach((el) => el.classList.add('reveal'))
+  revealTargets.forEach((el) => el.classList.add('reveal'))
 
-const io = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('in')
-        io.unobserve(entry.target)
-      }
-    })
-  },
-  { threshold: 0.15 }
-)
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in')
+          io.unobserve(entry.target)
+        }
+      })
+    },
+    { threshold: 0.15 }
+  )
 
-revealTargets.forEach((el) => io.observe(el))
+  revealTargets.forEach((el) => io.observe(el))
+}
+
+initCmsContent().then(() => {
+  setupGalleryTabs()
+  setupScrollReveal()
+})

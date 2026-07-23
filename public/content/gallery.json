@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "image": "/images/gallery-1.jpg", "alt": "Gia đình chụp ảnh tông kem tại BEO STUDIO", "caption": "Gia đình · concept tông nude", "category": "gia-dinh" },
+    { "image": "/images/gallery-2.jpg", "alt": "Bé trai chụp ảnh thôi nôi concept gấu nâu", "caption": "Bé · thôi nôi concept ONE", "category": "be" },
+    { "image": "/images/gallery-3.jpg", "alt": "Bé chụp ảnh concept biển mùa hè", "caption": "Bé · concept Hello Summer", "category": "be" },
+    { "image": "/images/gallery-4.jpg", "alt": "Gia đình ba mẹ và bé chụp tại studio", "caption": "Gia đình · khoảnh khắc bên con", "category": "gia-dinh" },
+    { "image": "/images/gallery-5.jpg", "alt": "Bé gái chụp ảnh thôi nôi tông hồng", "caption": "Newborn · tông hồng", "category": "newborn" },
+    { "image": "/images/gallery-6.jpg", "alt": "Mẹ và bé chụp ảnh váy trắng", "caption": "Mẹ & bé · concept trắng", "category": "me-bau" }
+  ]
+}
