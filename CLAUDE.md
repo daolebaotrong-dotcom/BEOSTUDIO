@@ -47,6 +47,10 @@ vào `~/Documents/CLAUDE/beostudio-web` và `git push`.
 ```
 beostudio-web/
 ├── index.html              # Trang chủ (toàn bộ nội dung — 13 section)
+├── vite.config.js          # Multi-page build: khai báo mọi trang HTML dùng chung /src/style.css + /src/main.js
+├── dich-vu/                # Trang dịch vụ theo chi nhánh (SEO địa phương, kiểu mjnstudio.com/dich-vu/...)
+│   ├── chup-anh-cho-be-long-thanh/index.html
+│   └── chup-anh-cho-be-bien-hoa/index.html
 ├── src/
 │   ├── style.css           # CSS + design tokens (tông luxury sáng, có dark mode tuỳ chọn)
 │   └── main.js             # JS: slideshow hero, lọc gallery theo tab, dropdown menu, theme toggle, scroll reveal
@@ -60,6 +64,8 @@ beostudio-web/
 ├── package.json
 └── CLAUDE.md               # (file này)
 ```
+
+⚠️ **Trang trong `dich-vu/` KHÔNG tự chứa CSS như trang album** — chúng dùng chung `/src/style.css` + `/src/main.js` với trang chủ, giống hệt cách `index.html` gốc làm. Muốn Vite build ra đúng cả 3 trang thì **bắt buộc phải giữ `vite.config.js`** (khai báo `build.rollupOptions.input` liệt kê từng trang) — nếu file này bị xoá hoặc ghi đè, `npm run build` sẽ chỉ build `index.html` và 2 trang dịch vụ sẽ biến mất khỏi bản deploy. Thêm trang dịch vụ mới (chi nhánh khác) thì nhớ thêm cả entry tương ứng vào `vite.config.js`.
 
 - **Trang chủ** = `index.html` + `src/style.css` + `src/main.js`.
 - **Trang album** = `public/album/baby/index.html` — file độc lập, tự chứa CSS + JS.
