@@ -169,6 +169,7 @@ h1, h2, h3, h4 {
   letter-spacing: 0.22em;
   color: var(--ink);
 }
+.brand-logo-img { display: block; height: 40px; width: auto; }
 .brand em { font-style: normal; color: var(--gold-deep); margin-left: 0.1em; }
 .brand-mark { width: 30px; height: 30px; color: var(--gold); }
 
