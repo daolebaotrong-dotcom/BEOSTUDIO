@@ -24,7 +24,7 @@
 - Logo thật: `public/images/logo-beo.png` (đã xử lý nền trong suốt từ file gốc trong Downloads). Favicon là monogram chữ "B" cắt từ logo, xem `public/favicon-*.png`.
 
 ### ⭐ CMS quản trị nội dung (Decap CMS, 2026-07)
-- Trang quản trị: **https://beostudio.top/admin/** — GitHub OAuth (setup 1 lần, xem `cms-oauth-worker/README.md`).
+- Trang quản trị: **https://beostudio.top/cms/** — GitHub OAuth (setup 1 lần, xem `cms-oauth-worker/README.md`).
 - Nội dung **gallery / bảng giá / cảm nhận khách hàng** đã tách khỏi HTML, sống ở `public/content/*.json`. `src/main.js` (hàm `initCmsContent`) fetch các file này và render động vào các `<div data-cms="...">` trên trang. Sửa nội dung qua CMS = sửa trực tiếp JSON này → git commit → Hostinger tự deploy.
 - Widget `list` của Decap CMS cho kéo-thả đổi thứ tự item ngay trong khung quản trị (ảnh gallery, gói giá, testimonial).
 - **Không tự ý viết đè HTML tĩnh (figure/price-card/blockquote) trở lại vào các trang** — sẽ làm nội dung "trôi" khỏi CMS. Muốn đổi nội dung mẫu, sửa thẳng file JSON trong `public/content/`.

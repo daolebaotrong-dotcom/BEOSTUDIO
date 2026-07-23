@@ -1,13 +1,13 @@
 # Đăng nhập CMS (Decap CMS) qua GitHub — hướng dẫn setup 1 lần
 
-Trang quản trị nội dung nằm ở **https://beostudio.top/admin/**. Để đăng nhập được, cần 2 việc — chỉ làm 1 lần:
+Trang quản trị nội dung nằm ở **https://beostudio.top/cms/**. Để đăng nhập được, cần 2 việc — chỉ làm 1 lần:
 
 ## Bước 1 — Tạo GitHub OAuth App
 
 1. Vào https://github.com/settings/developers → **OAuth Apps** → **New OAuth App**.
 2. Điền:
    - **Application name**: `BEO STUDIO CMS`
-   - **Homepage URL**: `https://beostudio.top/admin/`
+   - **Homepage URL**: `https://beostudio.top/cms/`
    - **Authorization callback URL**: `https://<TÊN-WORKER-CỦA-ANH>.workers.dev/callback` (điền ở bước 2 xong quay lại điền chỗ này)
 3. Bấm **Register application**.
 4. Copy **Client ID**.
@@ -27,9 +27,9 @@ Trang quản trị nội dung nằm ở **https://beostudio.top/admin/**. Để 
 ## Bước 3 — Báo lại cho Claude Code
 
 Gửi cho mình URL worker thật (dạng `https://beo-cms-auth.xxxx.workers.dev`), mình sẽ cập nhật vào
-`public/admin/config.yml` (giá trị `base_url`) và push lên — từ đó `/admin/` đăng nhập được.
+`public/cms/config.yml` (giá trị `base_url`) và push lên — từ đó `/cms/` đăng nhập được.
 
 ## Kiểm tra
 
-Sau khi xong, mở https://beostudio.top/admin/, bấm **Login with GitHub**, cho phép truy cập —
+Sau khi xong, mở https://beostudio.top/cms/, bấm **Login with GitHub**, cho phép truy cập —
 nếu vào được màn hình quản trị (thấy 3 mục: Bộ sưu tập ảnh / Bảng giá / Cảm nhận khách hàng) là thành công.
