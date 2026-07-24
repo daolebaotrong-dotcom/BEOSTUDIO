@@ -1,3 +1,51 @@
+// ============ FORM ĐẶT LỊCH ============
+const BOOKING_WEBHOOK_URL = 'https://n8n.beostudio.top/webhook/web-dat-lich'
+
+document.querySelectorAll('.booking-form').forEach((form) => {
+  const statusEl = form.querySelector('.form-status')
+  const submitBtn = form.querySelector('button[type="submit"]')
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+    if (statusEl) {
+      statusEl.textContent = ''
+      statusEl.classList.remove('is-success', 'is-error')
+    }
+
+    const data = Object.fromEntries(new FormData(form).entries())
+    if (!data.ten || !data.sdt) {
+      if (statusEl) {
+        statusEl.textContent = 'Anh/chị điền giúp họ tên và số điện thoại nhé.'
+        statusEl.classList.add('is-error')
+      }
+      return
+    }
+
+    if (submitBtn) submitBtn.disabled = true
+
+    try {
+      const res = await fetch(BOOKING_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('request failed')
+      if (statusEl) {
+        statusEl.textContent = 'Đã nhận thông tin — BEO sẽ liên hệ lại sớm nhất. Cảm ơn anh/chị!'
+        statusEl.classList.add('is-success')
+      }
+      form.reset()
+    } catch (err) {
+      if (statusEl) {
+        statusEl.textContent = 'Gửi chưa thành công, anh/chị gọi trực tiếp 0792 792 679 giúp mình nhé.'
+        statusEl.classList.add('is-error')
+      }
+    } finally {
+      if (submitBtn) submitBtn.disabled = false
+    }
+  })
+})
+
 // Chuyển chế độ sáng / tối
 const themeToggle = document.querySelector('.theme-toggle')
 const root = document.documentElement

@@ -593,6 +593,53 @@ h1, h2, h3, h4 {
 .blog-card:hover h3 { color: var(--gold-deep); }
 
 /* ============================================================
+   Form đặt lịch
+   ============================================================ */
+.booking-form {
+  max-width: 640px;
+  margin-inline: auto;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: clamp(1.8rem, 4vw, 2.8rem);
+  display: grid;
+  gap: 1.1rem;
+}
+.booking-form .form-row { display: grid; gap: 1.1rem; grid-template-columns: 1fr 1fr; }
+.booking-form .form-field { display: grid; gap: 0.45rem; }
+.booking-form .form-field--full { grid-column: 1 / -1; }
+.booking-form label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0.75em 0.9em;
+  width: 100%;
+}
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.booking-form textarea { resize: vertical; min-height: 80px; }
+.booking-form .btn-primary { justify-self: start; margin-top: 0.3rem; border: none; cursor: pointer; }
+.booking-form .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.booking-form .form-status {
+  font-size: 0.9rem;
+  padding: 0.7em 1em;
+  border-radius: 3px;
+  display: none;
+}
+.booking-form .form-status.is-success { display: block; background: color-mix(in srgb, #3a8a5a 15%, transparent); color: #2a6b43; }
+.booking-form .form-status.is-error { display: block; background: color-mix(in srgb, #c0392b 12%, transparent); color: #a4321f; }
+@media (max-width: 560px) {
+  .booking-form .form-row { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    CTA band
    ============================================================ */
 .cta-band {

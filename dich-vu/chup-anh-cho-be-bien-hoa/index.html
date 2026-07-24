@@ -300,6 +300,44 @@
         </div>
       </section>
 
+      <!-- ============ FORM ĐẶT LỊCH ============ -->
+      <section class="section container" id="dat-lich-form">
+        <header class="section-head section-head--center">
+          <p class="script">Đặt lịch</p>
+          <h2>Để lại thông tin, BEO gọi lại tư vấn</h2>
+          <span class="rule"></span>
+        </header>
+        <form class="booking-form">
+          <input type="hidden" name="chi_nhanh" value="bien-hoa" />
+          <div class="form-row">
+            <div class="form-field">
+              <label for="bf-ten">Họ và tên</label>
+              <input type="text" id="bf-ten" name="ten" required />
+            </div>
+            <div class="form-field">
+              <label for="bf-sdt">Số điện thoại</label>
+              <input type="tel" id="bf-sdt" name="sdt" required />
+            </div>
+          </div>
+          <div class="form-field form-field--full">
+            <label for="bf-dichvu">Dịch vụ quan tâm</label>
+            <select id="bf-dichvu" name="dich_vu">
+              <option>Bé sơ sinh</option>
+              <option>Mẹ bầu</option>
+              <option>Gia đình</option>
+              <option>Thôi nôi / sinh nhật</option>
+              <option>Khác</option>
+            </select>
+          </div>
+          <div class="form-field form-field--full">
+            <label for="bf-ngay">Ngày mong muốn (không bắt buộc)</label>
+            <input type="date" id="bf-ngay" name="ngay_mong_muon" />
+          </div>
+          <button type="submit" class="btn btn-primary">Gửi thông tin đặt lịch</button>
+          <p class="form-status" role="status"></p>
+        </form>
+      </section>
+
       <!-- ============ CTA BAND ============ -->
       <section class="cta-band" id="dat-lich">
         <div class="container cta-inner">
