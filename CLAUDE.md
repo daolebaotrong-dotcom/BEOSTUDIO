@@ -23,6 +23,12 @@
 - Ngoài trang chủ còn có: `dich-vu/chup-anh-cho-be-long-thanh/`, `dich-vu/chup-anh-cho-be-bien-hoa/` (trang dịch vụ theo chi nhánh), `bang-gia/`, `lien-he/`, `bo-suu-tap/` — tất cả build đa trang qua `vite.config.js` (xem mục 2).
 - Logo thật: `public/images/logo-beo.png` (đã xử lý nền trong suốt từ file gốc trong Downloads). Favicon là monogram chữ "B" cắt từ logo, xem `public/favicon-*.png`.
 
+### ⭐ Form đặt lịch → n8n → Data Table (2026-07)
+- Form (`.booking-form`) có trên trang chủ (`#dat-lich-form`, có chọn chi nhánh) và 2 trang `dich-vu/*` (chi nhánh cố định qua `<input type="hidden" name="chi_nhanh">`).
+- Submit gọi JS (`src/main.js`, đầu file) POST JSON tới webhook n8n: `https://n8n.beostudio.top/webhook/web-dat-lich`.
+- Workflow n8n: **"Web Đặt Lịch -> Data Table (Long Thành & Biên Hòa)"** (id `lchQKTlDQeGdvWDo`, connector `n8n-local`) — chuẩn hoá dữ liệu, route theo field `chi_nhanh`, ghi **upsert** vào đúng Data Table chi nhánh (`zI1tlPMRyEzJqACt` Long Thành / `LM1lbt4LyRNFObq2` Biên Hòa), dùng khoá ảo `PSID = "web-" + số điện thoại` (không phải PSID Messenger thật) để tránh trùng khi khách gửi lại form. Nội dung được gắn tiền tố `[Web]` để phân biệt nguồn với lead từ Pancake Chat.
+- **Đã tìm hiểu và xác nhận:** Pancake, Botcake, Webcake (3 nền tảng CSKH của Pancake Group mà BEO có tài khoản) **không có API công khai** để tạo lead trực tiếp từ 1 website ngoài mà không qua Messenger PSID trước — xem thêm trong memory tham chiếu. Vì vậy chọn phương án ghi vào Data Table (đã có sẵn, đội sale/AI đang xem hằng ngày) thay vì cố tích hợp thẳng vào Pancake/Botcake.
+
 ### ⭐ CMS quản trị nội dung (Decap CMS, 2026-07)
 - Trang quản trị: **https://beostudio.top/cms/** — GitHub OAuth (setup 1 lần, xem `cms-oauth-worker/README.md`).
 - Nội dung **gallery / bảng giá / cảm nhận khách hàng** đã tách khỏi HTML, sống ở `public/content/*.json`. `src/main.js` (hàm `initCmsContent`) fetch các file này và render động vào các `<div data-cms="...">` trên trang. Sửa nội dung qua CMS = sửa trực tiếp JSON này → git commit → Hostinger tự deploy.
@@ -55,21 +61,28 @@ vào `~/Documents/CLAUDE/beostudio-web` và `git push`.
 
 ```
 beostudio-web/
-├── index.html              # Trang chủ (toàn bộ nội dung — 13 section)
+├── index.html              # Trang chủ (13 section + form đặt lịch)
 ├── vite.config.js          # Multi-page build: khai báo mọi trang HTML dùng chung /src/style.css + /src/main.js
 ├── dich-vu/                # Trang dịch vụ theo chi nhánh (SEO địa phương, kiểu mjnstudio.com/dich-vu/...)
 │   ├── chup-anh-cho-be-long-thanh/index.html
 │   └── chup-anh-cho-be-bien-hoa/index.html
+├── bang-gia/index.html     # Trang bảng giá riêng
+├── lien-he/index.html      # Trang liên hệ riêng (2 chi nhánh + bản đồ)
+├── bo-suu-tap/index.html   # Trang bộ sưu tập/portfolio riêng
 ├── src/
 │   ├── style.css           # CSS + design tokens (tông luxury sáng, có dark mode tuỳ chọn)
-│   └── main.js             # JS: slideshow hero, lọc gallery theo tab, dropdown menu, theme toggle, scroll reveal
+│   └── main.js             # JS: slideshow hero, lọc gallery, CMS content loader, form đặt lịch, theme toggle, scroll reveal
 ├── public/                 # File tĩnh, copy nguyên xi khi build
-│   ├── favicon.svg
-│   ├── images/             # Ảnh trang chủ (hero-main, hero-inset, gallery-1..6)
+│   ├── content/             # gallery.json, pricing.json, testimonials.json — nguồn dữ liệu CMS (xem mục CMS)
+│   ├── cms/                 # Decap CMS admin (KHÔNG đặt tên "admin" — Hostinger tự loại trừ thư mục đó khi deploy)
+│   ├── favicon-*.png, apple-touch-icon.png, site.webmanifest
+│   ├── images/logo-beo.png # Logo thật, nền trong suốt
+│   ├── images/             # Ảnh trang chủ (hero-main, gallery-1..6)
 │   └── album/
 │       └── baby/
 │           ├── index.html  # TRANG ALBUM (masonry + lightbox, tự chứa CSS/JS)
 │           └── photos/     # Ảnh album: 1.jpg, 2.jpg ...
+├── cms-oauth-worker/        # Code + hướng dẫn Cloudflare Worker xác thực GitHub OAuth cho /cms/
 ├── package.json
 └── CLAUDE.md               # (file này)
 ```
@@ -202,9 +215,10 @@ Copy `public/album/baby/` → `public/album/<tên>/`, xoá ảnh cũ, sửa tiê
 |-------------|-----------|
 | Đổi chữ/nội dung trang chủ | `index.html` |
 | Đổi màu, font, khoảng cách | `src/style.css` (phần `:root` tokens) |
-| Sửa bảng giá | section `#bang-gia` trong `index.html` |
-| Đổi ảnh hero / gallery | thay file trong `public/images/` (giữ tên) |
-| Sửa hiệu ứng slideshow / lọc gallery | `src/main.js` |
+| Sửa bảng giá / gallery / testimonial | Qua CMS (`/cms/`) **hoặc** sửa thẳng `public/content/*.json` — KHÔNG sửa lại thành HTML cứng |
+| Đổi ảnh hero | thay file trong `public/images/` (giữ tên) |
+| Sửa hiệu ứng slideshow / lọc gallery / form đặt lịch | `src/main.js` |
+| Sửa nơi lead từ form đặt lịch đi đâu | workflow n8n `Web Đặt Lịch -> Data Table` (id `lchQKTlDQeGdvWDo`) |
 | Sửa giao diện album | `public/album/baby/index.html` |
 | Thêm/bớt ảnh trong album | thư mục `photos/` (File Manager hoặc commit) |
 | Mở/khoá truy cập theo quốc gia | hPanel → CDN → Traffic blocking |
