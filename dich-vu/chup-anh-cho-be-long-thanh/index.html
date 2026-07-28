@@ -49,6 +49,20 @@
         } catch (e) {}
       })();
     </script>
+    <!-- Signals Gateway Pixel Code -->
+    <script>
+    !function(a,h,e,v,n,t,s){
+      if(a.cbq)return;
+      n=a.cbq=function(){n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments);};
+      if(!a._cbq)a._cbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+      t=h.createElement(e);t.async=!0; t.src=v;s=h.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s);
+    }(window, document,'script', 'https://sgw.stape.ltd/sdk/6216490270544153174/events.js');
+    cbq('setHost', 'https://sgw.stape.ltd/');
+    cbq('init', '6216490270544153174');
+    cbq('track', 'PageView');
+    </script>
+  <!-- End Signals Gateway Pixel Code -->
   </head>
   <body>
     <header class="site-header" id="top">
