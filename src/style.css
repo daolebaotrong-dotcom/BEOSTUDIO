@@ -443,7 +443,7 @@ h1, h2, h3, h4 {
   color: #fff; background: linear-gradient(transparent, rgba(23,19,15,0.85));
 }
 .gallery figure.is-hidden { display: none; }
-.gallery-cta { text-align: center; margin-top: clamp(2rem, 4vw, 3rem); }
+.gallery-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-top: clamp(2rem, 4vw, 3rem); }
 
 /* ============================================================
    4 · BẢNG GIÁ
