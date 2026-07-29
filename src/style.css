@@ -170,6 +170,7 @@ h1, h2, h3, h4 {
   color: var(--ink);
 }
 .brand-logo-img { display: block; height: 40px; width: auto; }
+:root[data-theme="dark"] .brand-logo-img { filter: brightness(0) invert(1); }
 .brand em { font-style: normal; color: var(--gold-deep); margin-left: 0.1em; }
 .brand-mark { width: 30px; height: 30px; color: var(--gold); }
 
@@ -657,6 +658,7 @@ h1, h2, h3, h4 {
 .site-footer { background: var(--noir); color: var(--ivory-soft); padding-top: clamp(3.5rem, 6vw, 5rem); }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; align-items: start; gap: 2.5rem; padding-bottom: 3rem; }
 .site-footer .brand { color: var(--ivory); margin-bottom: 1rem; }
+.site-footer .brand-logo-img { filter: brightness(0) invert(1); }
 .footer-brand p { font-size: 0.9rem; max-width: 30ch; }
 .site-footer h4 { font-family: var(--font-body); font-weight: 500; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-script); margin-bottom: 1.1rem; }
 .site-footer address { font-style: normal; font-size: 0.9rem; margin-bottom: 0.5rem; }
