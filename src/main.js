@@ -228,17 +228,24 @@ async function initCmsContent() {
 function setupGalleryTabs() {
   const tabs = Array.from(document.querySelectorAll('.gtab'))
   if (!tabs.length) return
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const filter = tab.dataset.filter
-      tabs.forEach((t) => t.classList.toggle('is-active', t === tab))
-      const figures = Array.from(document.querySelectorAll('.gallery figure'))
-      figures.forEach((fig) => {
-        const show = filter === 'all' || fig.dataset.cat === filter
-        fig.classList.toggle('is-hidden', !show)
-      })
+
+  const applyFilter = (filter) => {
+    tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.filter === filter))
+    const figures = Array.from(document.querySelectorAll('.gallery figure'))
+    figures.forEach((fig) => {
+      const show = filter === 'all' || fig.dataset.cat === filter
+      fig.classList.toggle('is-hidden', !show)
     })
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => applyFilter(tab.dataset.filter))
   })
+
+  // Trang gửi riêng theo chủ đề (VD /cho-be/, /gia-dinh/) khai báo
+  // data-default-filter trên .gallery-tabs để mở sẵn đúng tab đó.
+  const defaultFilter = document.querySelector('.gallery-tabs')?.dataset.defaultFilter
+  if (defaultFilter) applyFilter(defaultFilter)
 }
 
 // ============ SCROLL REVEAL ============

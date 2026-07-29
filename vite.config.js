@@ -12,6 +12,8 @@ export default defineConfig({
         main: r('./index.html'),
         dichVuLongThanh: r('./dich-vu/chup-anh-cho-be-long-thanh/index.html'),
         dichVuBienHoa: r('./dich-vu/chup-anh-cho-be-bien-hoa/index.html'),
+        dichVuBienHoaChoBe: r('./dich-vu/chup-anh-cho-be-bien-hoa/cho-be/index.html'),
+        dichVuBienHoaGiaDinh: r('./dich-vu/chup-anh-cho-be-bien-hoa/gia-dinh/index.html'),
         bangGia: r('./bang-gia/index.html'),
         lienHe: r('./lien-he/index.html'),
         boSuuTap: r('./bo-suu-tap/index.html'),
