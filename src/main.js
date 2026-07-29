@@ -225,6 +225,9 @@ async function initCmsContent() {
 }
 
 // ============ LỌC BỘ SƯU TẬP THEO TAB (query động vì ảnh render sau) ============
+// "be" là nhánh cha, gồm cả ảnh gắn category con "be-trai" / "be-gai".
+const GALLERY_FILTER_GROUPS = { be: ['be', 'be-trai', 'be-gai'] }
+
 function setupGalleryTabs() {
   const tabs = Array.from(document.querySelectorAll('.gtab'))
   if (!tabs.length) return
@@ -232,8 +235,9 @@ function setupGalleryTabs() {
   const applyFilter = (filter) => {
     tabs.forEach((t) => t.classList.toggle('is-active', t.dataset.filter === filter))
     const figures = Array.from(document.querySelectorAll('.gallery figure'))
+    const group = GALLERY_FILTER_GROUPS[filter]
     figures.forEach((fig) => {
-      const show = filter === 'all' || fig.dataset.cat === filter
+      const show = filter === 'all' || fig.dataset.cat === filter || (group && group.includes(fig.dataset.cat))
       fig.classList.toggle('is-hidden', !show)
     })
   }

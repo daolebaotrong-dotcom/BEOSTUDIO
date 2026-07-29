@@ -13,6 +13,8 @@ export default defineConfig({
         dichVuLongThanh: r('./dich-vu/chup-anh-cho-be-long-thanh/index.html'),
         dichVuBienHoa: r('./dich-vu/chup-anh-cho-be-bien-hoa/index.html'),
         choBe: r('./cho-be/index.html'),
+        beTrai: r('./be-trai/index.html'),
+        beGai: r('./be-gai/index.html'),
         giaDinh: r('./gia-dinh/index.html'),
         bangGia: r('./bang-gia/index.html'),
         lienHe: r('./lien-he/index.html'),
