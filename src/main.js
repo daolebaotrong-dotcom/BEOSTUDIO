@@ -34,6 +34,13 @@ document.querySelectorAll('.booking-form').forEach((form) => {
         statusEl.textContent = 'Đã nhận thông tin — BEO sẽ liên hệ lại sớm nhất. Cảm ơn anh/chị!'
         statusEl.classList.add('is-success')
       }
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          method: 'form_dat_lich',
+          chi_nhanh: data.chi_nhanh || '',
+          dich_vu: data.dich_vu || '',
+        })
+      }
       form.reset()
     } catch (err) {
       if (statusEl) {
