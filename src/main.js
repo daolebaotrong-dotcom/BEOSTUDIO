@@ -41,6 +41,12 @@ document.querySelectorAll('.booking-form').forEach((form) => {
           dich_vu: data.dich_vu || '',
         })
       }
+      if (typeof cbq === 'function') {
+        cbq('track', 'Lead', {
+          content_name: data.dich_vu || '',
+          content_category: data.chi_nhanh || '',
+        })
+      }
       form.reset()
     } catch (err) {
       if (statusEl) {
