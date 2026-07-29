@@ -1,11 +1,11 @@
 {
   "items": [
-    { "image": "/album/gia-dinh/photos/1.jpg", "alt": "Gia đình chụp ảnh thôi nôi bé tại BEO STUDIO Biên Hoà", "caption": "Gia đình · khoảnh khắc thôi nôi", "category": "gia-dinh" },
-    { "image": "/album/be-trai/photos/1.jpg", "alt": "Bé trai chụp ảnh thôi nôi concept Happy Birthday tại BEO STUDIO Biên Hoà", "caption": "Bé trai · concept Happy Birthday", "category": "be-trai" },
-    { "image": "/album/be-gai/photos/1.jpg", "alt": "Bé gái chụp ảnh concept nơ tại BEO STUDIO Biên Hoà", "caption": "Bé gái · concept nơ pastel", "category": "be-gai" },
-    { "image": "/album/gia-dinh/photos/2.jpg", "alt": "Gia đình ba mẹ và bé chụp tại BEO STUDIO Biên Hoà", "caption": "Gia đình · khoảnh khắc bên con", "category": "gia-dinh" },
-    { "image": "/album/be-trai/photos/2.jpg", "alt": "Bé trai chụp ảnh tại BEO STUDIO Biên Hoà", "caption": "Bé trai · phong cách tại studio", "category": "be-trai" },
-    { "image": "/album/be-gai/photos/2.jpg", "alt": "Bé gái chụp ảnh tại BEO STUDIO Biên Hoà", "caption": "Bé gái · phong cách tại studio", "category": "be-gai" },
+    { "image": "/album/bien-hoa/gia-dinh/photos/1.jpg", "alt": "Gia đình chụp ảnh thôi nôi bé tại BEO STUDIO Biên Hoà", "caption": "Gia đình · khoảnh khắc thôi nôi", "category": "gia-dinh" },
+    { "image": "/album/bien-hoa/be-trai/photos/1.jpg", "alt": "Bé trai chụp ảnh thôi nôi concept Happy Birthday tại BEO STUDIO Biên Hoà", "caption": "Bé trai · concept Happy Birthday", "category": "be-trai" },
+    { "image": "/album/bien-hoa/be-gai/photos/1.jpg", "alt": "Bé gái chụp ảnh concept nơ tại BEO STUDIO Biên Hoà", "caption": "Bé gái · concept nơ pastel", "category": "be-gai" },
+    { "image": "/album/bien-hoa/gia-dinh/photos/2.jpg", "alt": "Gia đình ba mẹ và bé chụp tại BEO STUDIO Biên Hoà", "caption": "Gia đình · khoảnh khắc bên con", "category": "gia-dinh" },
+    { "image": "/album/bien-hoa/be-trai/photos/2.jpg", "alt": "Bé trai chụp ảnh tại BEO STUDIO Biên Hoà", "caption": "Bé trai · phong cách tại studio", "category": "be-trai" },
+    { "image": "/album/bien-hoa/be-gai/photos/2.jpg", "alt": "Bé gái chụp ảnh tại BEO STUDIO Biên Hoà", "caption": "Bé gái · phong cách tại studio", "category": "be-gai" },
     { "image": "/images/gallery-5.jpg", "alt": "Bé gái chụp ảnh thôi nôi tông hồng", "caption": "Newborn · tông hồng", "category": "newborn" },
     { "image": "/images/gallery-6.jpg", "alt": "Mẹ và bé chụp ảnh váy trắng", "caption": "Mẹ & bé · concept trắng", "category": "me-bau" }
   ]

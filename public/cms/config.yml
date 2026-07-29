@@ -5,8 +5,8 @@ backend:
   base_url: https://beo-cms-auth.daolebaotrong.workers.dev
   auth_endpoint: auth
 
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "public/album/bien-hoa"
+public_folder: "/album/bien-hoa"
 
 site_url: https://beostudio.top
 display_url: https://beostudio.top
@@ -33,7 +33,9 @@ collections:
                 name: "category"
                 widget: "select"
                 options:
-                  - { label: "Cho bé", value: "be" }
+                  - { label: "Cho bé (chung)", value: "be" }
+                  - { label: "Bé trai", value: "be-trai" }
+                  - { label: "Bé gái", value: "be-gai" }
                   - { label: "Newborn", value: "newborn" }
                   - { label: "Mẹ bầu", value: "me-bau" }
                   - { label: "Gia đình", value: "gia-dinh" }
