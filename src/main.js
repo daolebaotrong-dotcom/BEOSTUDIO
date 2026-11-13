@@ -1,5 +1,6 @@
 // ============ FORM ĐẶT LỊCH ============
-const BOOKING_WEBHOOK_URL = 'https://n8n.beostudio.top/webhook/web-dat-lich'
+// Make scenario 10155734 "Web · Form đặt lịch → Lưu lead + Telegram" (n8n đã bỏ từ 08/2026)
+const BOOKING_WEBHOOK_URL = 'https://hook.eu2.make.com/uxhtot5dopj1jjk7wy3w3nyf8a97v24p'
 
 document.querySelectorAll('.booking-form').forEach((form) => {
   const statusEl = form.querySelector('.form-status')

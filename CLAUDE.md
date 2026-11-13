@@ -23,11 +23,12 @@
 - Ngoài trang chủ còn có: `dich-vu/chup-anh-cho-be-long-thanh/`, `dich-vu/chup-anh-cho-be-bien-hoa/` (trang dịch vụ theo chi nhánh), `bang-gia/`, `lien-he/`, `bo-suu-tap/` — tất cả build đa trang qua `vite.config.js` (xem mục 2).
 - Logo thật: `public/images/logo-beo.png` (đã xử lý nền trong suốt từ file gốc trong Downloads). Favicon là monogram chữ "B" cắt từ logo, xem `public/favicon-*.png`.
 
-### ⭐ Form đặt lịch → n8n → Data Table (2026-07)
-- Form (`.booking-form`) có trên trang chủ (`#dat-lich-form`, có chọn chi nhánh) và 2 trang `dich-vu/*` (chi nhánh cố định qua `<input type="hidden" name="chi_nhanh">`).
-- Submit gọi JS (`src/main.js`, đầu file) POST JSON tới webhook n8n: `https://n8n.beostudio.top/webhook/web-dat-lich`.
-- Workflow n8n: **"Web Đặt Lịch -> Data Table (Long Thành & Biên Hòa)"** (id `lchQKTlDQeGdvWDo`, connector `n8n-local`) — chuẩn hoá dữ liệu, route theo field `chi_nhanh`, ghi **upsert** vào đúng Data Table chi nhánh (`zI1tlPMRyEzJqACt` Long Thành / `LM1lbt4LyRNFObq2` Biên Hòa), dùng khoá ảo `PSID = "web-" + số điện thoại` (không phải PSID Messenger thật) để tránh trùng khi khách gửi lại form. Nội dung được gắn tiền tố `[Web]` để phân biệt nguồn với lead từ Pancake Chat.
-- **Đã tìm hiểu và xác nhận:** Pancake, Botcake, Webcake (3 nền tảng CSKH của Pancake Group mà BEO có tài khoản) **không có API công khai** để tạo lead trực tiếp từ 1 website ngoài mà không qua Messenger PSID trước — xem thêm trong memory tham chiếu. Vì vậy chọn phương án ghi vào Data Table (đã có sẵn, đội sale/AI đang xem hằng ngày) thay vì cố tích hợp thẳng vào Pancake/Botcake.
+### ⭐ Form đặt lịch → Make (đổi 2026-11-13; trước đó là n8n)
+- Form (`.booking-form`) có trên trang chủ (`#dat-lich-form`, có chọn chi nhánh) và 2 trang `dich-vu/*` (chi nhánh cố định qua `<input type="hidden" name="chi_nhanh">`). Payload: `{ten, sdt, dich_vu, ngay_mong_muon, chi_nhanh}` với `chi_nhanh` = `long-thanh` | `bien-hoa`.
+- Submit gọi JS (`src/main.js`, đầu file) POST JSON tới webhook Make `https://hook.eu2.make.com/uxhtot5dopj1jjk7wy3w3nyf8a97v24p` (hook `4511515`). Webhook Make trả CORS `*` nên gọi thẳng từ trình duyệt được.
+- Scenario Make **`10155734` "Web · Form đặt lịch → Lưu lead + Telegram"**: lưu mỗi lead vào data store `209366` "Lead form web đặt lịch" (khoá `YYYYMMDDHHmmss_sdt`, giờ VN) rồi báo Telegram cho chủ studio.
+- **Bẫy đã trả giá:** từ khi bỏ n8n (08/2026) tới 2026-11-13, form vẫn POST vào `n8n.beostudio.top/webhook/web-dat-lich` đã chết → khách nào gửi cũng thấy "Gửi chưa thành công", lead web mất ~3 tháng. Khi tắt/đổi hệ tự động hoá, phải kiểm tra lại URL webhook trong `src/main.js`.
+- Pancake / Botcake / Webcake **không có API công khai** để tạo lead từ web ngoài khi khách chưa nhắn Messenger → lead web không vào Pancake; kế hoạch tiếp: gửi ZNS Zalo xác nhận lịch qua Make.
 
 ### ⭐ CMS quản trị nội dung (Decap CMS, 2026-07)
 - Trang quản trị: **https://beostudio.top/cms/** — GitHub OAuth (setup 1 lần, xem `cms-oauth-worker/README.md`).
@@ -218,7 +219,7 @@ Copy `public/album/baby/` → `public/album/<tên>/`, xoá ảnh cũ, sửa tiê
 | Sửa bảng giá / gallery / testimonial | Qua CMS (`/cms/`) **hoặc** sửa thẳng `public/content/*.json` — KHÔNG sửa lại thành HTML cứng |
 | Đổi ảnh hero | thay file trong `public/images/` (giữ tên) |
 | Sửa hiệu ứng slideshow / lọc gallery / form đặt lịch | `src/main.js` |
-| Sửa nơi lead từ form đặt lịch đi đâu | workflow n8n `Web Đặt Lịch -> Data Table` (id `lchQKTlDQeGdvWDo`) |
+| Sửa nơi lead từ form đặt lịch đi đâu | scenario Make `10155734` (webhook `4511515`) |
 | Sửa giao diện album | `public/album/baby/index.html` |
 | Thêm/bớt ảnh trong album | thư mục `photos/` (File Manager hoặc commit) |
 | Mở/khoá truy cập theo quốc gia | hPanel → CDN → Traffic blocking |
